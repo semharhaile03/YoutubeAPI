@@ -2,11 +2,13 @@ import os
 import json
 import requests
 
+
 API_KEY = os.environ.get('YOUTUBEAPI')
 BASE_URL = "https://www.googleapis.com/youtube/v3"
 country_code = input("Enter country code (ex. US, CA): ")
+part = "snippet,contentDetails,statistics"
 
-url = f"{BASE_URL}/videos?part=snippet,contentDetails,statistics&chart=mostPopular&regionCode={country_code}&maxResults=3&key={API_KEY}"
+url = f"{BASE_URL}/videos?part={part}&chart=mostPopular&regionCode={country_code}&maxResults=3&key={API_KEY}"
 
 response = requests.get(url)
 
@@ -24,17 +26,15 @@ for video in videos:
     channel = video["snippet"]["channelTitle"]
      
     if "tags" in video["snippet"]:
-      tags = video["snippet"]["tags"]
+        tags = video["snippet"]["tags"]
     else:
-      tags = "None"
-    
+        tags = "None"
+
     views = video["statistics"]["viewCount"]
     likes = video["statistics"]["likeCount"]
     comments = video["statistics"]["commentCount"]
-
-
     print(
-    f"""
+      f"""
       Title: {title}
       Description: {description}...
       Channel: {channel}
