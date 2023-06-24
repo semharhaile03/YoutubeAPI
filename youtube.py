@@ -22,7 +22,11 @@ for video in videos:
     title = video["snippet"]["title"]
     description = video["snippet"]["description"][:200]
     channel = video["snippet"]["channelTitle"]
-    tags = video["snippet"]["tags"]
+     
+    if "tags" in video["snippet"]:
+      tags = video["snippet"]["tags"]
+    else:
+      tags = "None"
     
     views = video["statistics"]["viewCount"]
     likes = video["statistics"]["likeCount"]
