@@ -6,10 +6,11 @@ import pandas as pd
 
 API_KEY = os.environ.get('YOUTUBEAPI')
 BASE_URL = "https://www.googleapis.com/youtube/v3"
-country_code = input("Enter country code (ex. US, CA): ")
-part = "snippet,contentDetails,statistics"
+country = input("Enter country code (ex. US, CA): ")
+params1 = "part=snippet,contentDetails,statistics&chart=mostPopular"
+params2 = f"&regionCode={country}&maxResults=10"
 
-url = f"{BASE_URL}/videos?part={part}&chart=mostPopular&regionCode={country_code}&maxResults=10&key={API_KEY}"
+url = f"{BASE_URL}/videos?{params1}{params2}&key={API_KEY}"
 
 response = requests.get(url)
 
@@ -19,7 +20,7 @@ videos = data["items"]
 
 print(f"""
 
-Popular Videos in {country_code}:""")
+Popular Videos in {country}:""")
 
 youtubevideos = pd.DataFrame({
     "Title": [],
