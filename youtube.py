@@ -47,10 +47,12 @@ for video in videos:
     likes = video["statistics"]["likeCount"]
     comments = video["statistics"]["commentCount"]
 
-    row = {"Title": title, "Description": description,
-          "Channel": channel, "Tags": str(tags),
-          "Views": views, "Likes Count": likes,
-          "Comments Count": comments}
+    row = {
+        "Title": title, "Description": description,
+        "Channel": channel, "Tags": str(tags),
+        "Views": views, "Likes Count": likes,
+        "Comments Count": comments
+        }
 
     youtubevideos.loc[len(youtubevideos)] = row
     print(
