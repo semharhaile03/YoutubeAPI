@@ -48,9 +48,9 @@ for video in videos:
     comments = video["statistics"]["commentCount"]
 
     row = {"Title": title, "Description": description,
-        "Channel": channel, "Tags": str(tags),
-        "Views": views, "Likes Count": likes,
-        "Comments Count": comments}
+          "Channel": channel, "Tags": str(tags),
+          "Views": views, "Likes Count": likes,
+          "Comments Count": comments}
 
     youtubevideos.loc[len(youtubevideos)] = row
     print(
@@ -67,5 +67,5 @@ for video in videos:
 engine = db.create_engine('sqlite:///youtubevideos.db')
 youtubevideos.to_sql("popular", con=engine, if_exists='replace', index=False)
 with engine.connect() as connection:
-    query_result = connection.execute(db.text("SELECT * FROM popular;")).fetchall()
-    print(pd.DataFrame(query_result))
+    result = connection.execute(db.text("SELECT * FROM popular;")).fetchall()
+    print(pd.DataFrame(result))
